@@ -1,0 +1,4 @@
+[application]
+config/name="ObstacleRunner"
+run/main_scene="res://Main.tscn"
+config/features= [ "4.0" ]

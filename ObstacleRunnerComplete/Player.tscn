@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://Player"]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource(1)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+modulate = Color(0.2, 0.8, 1.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = RectangleShape2D {
+    extents = Vector2(16, 16)
+}

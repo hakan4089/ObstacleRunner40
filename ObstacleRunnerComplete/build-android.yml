@@ -1,0 +1,38 @@
+name: Build Android APK (Godot 4)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up Godot
+        uses: chickensoft-games/setup-godot@v1
+        with:
+          version: "4.2"
+          use-dotnet: "false"
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: "platforms;android-34 build-tools;34.0.0"
+
+      - name: Build debug APK
+        run: |
+          mkdir -p build
+          godot --headless --export-debug "Android" build/ObstacleRunner-debug.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ObstacleRunner-debug.apk
+          path: build/ObstacleRunner-debug.apk
